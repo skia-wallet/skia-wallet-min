@@ -1,0 +1,21 @@
+{
+  "name": "skia-wallet",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.2",
+    "next": "^12.1.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "starknet": "^3.5.1"
+  }
+}

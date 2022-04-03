@@ -1,0 +1,64 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+header h1 {
+  font-size: 35px;
+}
+
+.accounts {
+  margin: 3%;
+  padding: 2%;
+  text-align: center;
+}
+
+.accounts h2 {
+  font-size: 30px;
+}
+
+.accounts button {
+  margin: 5px;
+  padding: 5px;
+}
+
+header {
+  margin: 2%;
+}
+
+.flex-container {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 15px;
+  text-align: left;
+  min-height: 150px;
+}
+
+#create {
+  display: none;
+}
+
+.flex-item {
+  background-color: #f1f1f1;
+  padding: 20px;
+  flex: 100%;
+}
+
+h1 {
+  text-align: center;
+}
+
+#private {
+  display: none;
+}
+
+/* Responsive layout - makes a one column-layout instead of a two-column layout */
+@media (max-width: 800px) {
+
+  .flex-item-right,
+  .flex-item-left {
+    flex: 100%;
+  }
+}
