@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { public_key, accounts, showWelcome, showAccounts, createAccount, init }from './service';
+import { public_key, accounts, showWelcome, showAccounts, createAccount, init }from './src/service';
 
 export default class extends Component {
     render() {
