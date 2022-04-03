@@ -37,6 +37,10 @@ header {
 }
 
 #create {
+  display: block;
+}
+
+#account {
   display: none;
 }
 
