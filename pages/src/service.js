@@ -1,5 +1,5 @@
 import { ec, defaultProvider, Contract, hash } from 'starknet';
-import CompiledAccount from '../public/Account.json';
+import CompiledAccount from '../../public/Account.json';
 
 if (typeof window === 'object') {
     let accounts = [];
