@@ -1,4 +1,6 @@
-import { ec, defaultProvider, Contract, hash } from 'starknet';
+import { ec, defaultProvider, Contract, hash, Account } from 'starknet';
+import { getKeyPair } from 'starknet/dist/utils/ellipticCurve';
+import { transformCallsToMulticallArrays } from 'starknet/utils/transaction'
 import CompiledAccount from './public/Account.json';
 
 if (typeof window === 'object') {
@@ -38,26 +40,47 @@ if (typeof window === 'object') {
             status: "Account Deployed!",
             type: "Simple"
         }
+        const accountContract = new Contract(
+            CompiledAccount.abi,
+            account.contract_address
+        );
+    
+        console.log("initializing account....");
+        await accountContract.initialize(
+            public_key,
+            "0"
+        );
+
         accounts[accounts.length] = account;
         localStorage.setItem("accounts", JSON.stringify(accounts));
         console.log(`account deployed to ${accountTxn.address}`);
         location.reload();
     }
 
-    async function init(account) {
-        const accountContract = new Contract(
-            CompiledAccount.abi,
-            account.contract_address
+    async function invoke(account, contract_address, method, args, callBackUrl) {
+
+        const accountContract = new Account(
+            defaultProvider,
+            accounts[account].contract_address,
+            JSON.parse(localStorage.getItem("keys")).keyPair
         );
 
-        console.log("initializing account....");
-        await accountContract.initialize(
-            public_key,
-            "0"
-        );
-        document.getElementById(account.name).style.display = "none";
+        console.log(`Callling contract...`);
+        
+        // Account.execute not working
+        // TODO: Replace with accoount.execute
+
+        const Txn = await defaultProvider.invokeFunction({
+            contractAddress: contract_address,
+            entrypoint: method,
+            calldata: args
+        });
+        document.getElementById('status').innerHTML = `Transaction hash: <a href="https://goerli.voyager.online/tx/${Txn.transaction_hash}">${Txn.transaction_hash}</a>`;
+        //window.location.href = callBackUrl;
+        // console.log("success!")
+        // return Txn.transaction_hash;
     }
 
-    module.exports = {public_key, accounts, showWelcome, showAccounts, createAccount, init}
+    module.exports = {public_key, accounts, showWelcome, showAccounts, createAccount, invoke}
 }
 

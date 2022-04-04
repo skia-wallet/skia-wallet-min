@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { public_key, accounts, showWelcome, showAccounts, createAccount, init }from '../service';
+import { public_key, accounts, showWelcome, showAccounts, createAccount} from '../service';
 
 export default class extends Component {
     render() {
@@ -9,6 +9,7 @@ export default class extends Component {
         } else {
             showAccounts();
         }
+        
         document.getElementById("create-account").addEventListener('click', createAccount);
         //localStorage.clear();
     }    
@@ -37,10 +38,10 @@ export default class extends Component {
                         <div className="flex-container">
                             <div className="flex-item">
                                 <p>Account Name: <span id='account-name'>{account.name}</span></p>
-                                <p>Contract Address: <span id='contract-address'>{account.contract_address}</span></p>
+                                <p>Contract Address: <span id='contract-address'>
+                                    <a href={'https://goerli.voyager.online/contract/' + account.contract_address}>{account.contract_address}</a>
+                                    </span></p>
                                 <p>Type: <span id='account-type'> {account.type} </span></p>
-                                <p>Status: <span id='account-status'> {account.status} </span></p><br/>
-                                <button id={account.name} onClick={init(account)}>Initialize</button>
                             </div>
                         </div>
                     ) : <></>

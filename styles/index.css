@@ -58,11 +58,8 @@ h1 {
   display: none;
 }
 
-/* Responsive layout - makes a one column-layout instead of a two-column layout */
 @media (max-width: 800px) {
-
-  .flex-item-right,
-  .flex-item-left {
+  .flex-item {
     flex: 100%;
   }
 }
