@@ -32,4 +32,4 @@ To call a method from a smart contract, use the `call()` function. This will not
 @args: a stringify array of the arguments
 ```
 ### Demo dap
-[Code](https://github.com/skia-wallet/ExampleDapp) [demo](https://example-dapp.vercel.app/)
+[Code](https://github.com/skia-wallet/ExampleDapp) | [demo](https://example-dapp.vercel.app/)
