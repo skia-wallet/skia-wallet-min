@@ -5,15 +5,13 @@ export default class extends Component {
     static getInitialProps({query}) {
     return {query}
   }
-
-    render() {
-        const query = this.props.query
-        const {contract_address, method, args, callbackUrl} = query;
-        const url = callbackUrl + '/'; 
-        const newArgs = JSON.parse(args);
-        //console.log(typeof(newArgs))
-
+  
+  render() {
         if (typeof(window) === 'object'){
+            if(accounts.length == 0) {
+                location.href = '/'
+            }
+            console.log(accounts)
             document.getElementById("confirm").onclick = function () {
                 invoke(0, contract_address, method, newArgs, url)
             }
@@ -21,6 +19,12 @@ export default class extends Component {
                 location.href = url;
             }
         }
+        const query = this.props.query
+        const {contract_address, method, args, callbackUrl} = query;
+        const url = callbackUrl + '/'; 
+        const newArgs = JSON.parse(args);
+        //console.log(typeof(newArgs))
+
 
         return (
             <>
