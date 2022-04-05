@@ -1,12 +1,33 @@
 # Skia Wallet mini
- A simple web app that creates an account on Startknet
+ A web based starknet wallet that works on any device
 ## Usage
-Follow this process to run the app 
-## Install dependencies
+To connect your dapp with skia wallet, install the `skia-wallet` npm package
 ```
- yarn
+npm i skia-wallet
+# or
+yarn add skia-wallet
 ```
-## Run in development mode
+
+### import the package
+```javascript
+import {execute, call} from 'skia-wallet';
 ```
-yarn dev
+
+### Invoke
+To invoke a method on a smart contract, use the `execute()` function. This will prompt the user to confirm the transaction.
+Args:
+```
+@contractAddress: the smart contract address
+@method: the method name
+@args: a stringify array of the arguments
+@callbackUrl: Where user should be redirected after confirming transaction or cancelling.
+```
+
+
+### Call 
+To call a method from a smart contract, use the `call()` function. This will not prompt the user to confirm the transaction.
+```
+@contractAddress: the smart contract address
+@method: the method name
+@args: a stringify array of the arguments
 ```

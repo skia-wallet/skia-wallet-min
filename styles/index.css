@@ -31,12 +31,16 @@ header {
   margin-top: 20px;
   display: flex;
   flex-wrap: wrap;
-  font-size: 15px;
+  font-size: 1rem;
   text-align: left;
   min-height: 150px;
 }
 
 #create {
+  display: block;
+}
+
+#account {
   display: none;
 }
 
@@ -54,11 +58,16 @@ h1 {
   display: none;
 }
 
-/* Responsive layout - makes a one column-layout instead of a two-column layout */
-@media (max-width: 800px) {
+#public-key {
+  font-size: 1rem;
+}
 
-  .flex-item-right,
-  .flex-item-left {
-    flex: 100%;
+
+@media (max-width: 650px) {
+  .flex-container {
+    font-size: 0.5rem;
+  }
+  #public-key {
+    font-size: 0.6rem;
   }
 }
