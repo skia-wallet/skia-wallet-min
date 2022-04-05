@@ -22,22 +22,25 @@ if (typeof window === 'object') {
     }
     
     async function createAccount() {
+        // TODO: encrypt keyPair with user password
         document.getElementById('wait').innerHTML = "Please wait, deploying account...";
-        const starkKeyPair = ec.genKeyPair();
-        const starkKeyPub = ec.getStarkKey(starkKeyPair);
+        if (!public_key) {
+            const starkKeyPair = ec.genKeyPair();
+            const starkKeyPub = ec.getStarkKey(starkKeyPair);
         
-        localStorage.setItem("keys", JSON.stringify({keyPair: starkKeyPair, keyPub: starkKeyPub}));
+            localStorage.setItem("keys", JSON.stringify({keyPair: starkKeyPair, keyPub: starkKeyPub}));
+            public_key = JSON.parse(localStorage.getItem("keys")).keyPub.toString();
+        }
         
         console.log("deploying account....");
+        console.log(public_key)
         const accountTxn = await defaultProvider.deployContract({
             contract: CompiledAccount,
-            addressSalt: starkKeyPub
+            //addressSalt: public_key
         });
-        
         const account = {
             name: "Account ".concat(accounts.length.toString()),
             contract_address: accountTxn.address,
-            status: "Account Deployed!",
             type: "Simple"
         }
         const accountContract = new Contract(
@@ -46,18 +49,17 @@ if (typeof window === 'object') {
         );
     
         console.log("initializing account....");
-        await accountContract.initialize(
+        const initTxn = await accountContract.initialize(
             public_key,
             "0"
         );
-
         accounts[accounts.length] = account;
         localStorage.setItem("accounts", JSON.stringify(accounts));
         console.log(`account deployed to ${accountTxn.address}`);
         location.reload();
     }
 
-    async function invoke(account, contract_address, method, args, callBackUrl) {
+    async function invoke(account, contract_address, method, args, callbackUrl) {
 
         const accountContract = new Account(
             defaultProvider,
@@ -76,9 +78,10 @@ if (typeof window === 'object') {
             calldata: args
         });
         document.getElementById('status').innerHTML = `Transaction hash: <a href="https://goerli.voyager.online/tx/${Txn.transaction_hash}">${Txn.transaction_hash}</a>`;
-        //window.location.href = callBackUrl;
-        // console.log("success!")
-        // return Txn.transaction_hash;
+        document.getElementById('confirm').style.display = 'none';
+        document.getElementById('cancel').style.display = 'none';
+
+        window.location.href = callbackUrl;
     }
 
     module.exports = {public_key, accounts, showWelcome, showAccounts, createAccount, invoke}

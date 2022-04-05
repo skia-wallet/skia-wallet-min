@@ -10,7 +10,7 @@ export default class extends Component {
             showAccounts();
         }
         
-        document.getElementById("create-account").addEventListener('click', createAccount);
+        document.querySelector(".create-account").addEventListener('click', createAccount);
         //localStorage.clear();
     }    
         return (
@@ -23,7 +23,7 @@ export default class extends Component {
                 <h1>Welcome to Skia Wallet</h1><br />
 
                 <p>Get started by creating an account </p><br/>
-                <button id="create-account">Create Account</button>
+                <button className="create-account">Create Account</button>
                 <p id='wait'></p>
             </section>
             <section className='accounts' id="account">
@@ -31,7 +31,7 @@ export default class extends Component {
     
                 <p><strong>Public key: </strong><span id='public-key'>{public_key}</span> </p>
                 <p id='private'><strong>Private Key: </strong><span id='private-key'></span></p><br />
-                <button>Show Private Key</button>
+                <button>Export Private Key</button>
             {
                 accounts ?
                     accounts.map((account) => 
@@ -45,7 +45,8 @@ export default class extends Component {
                             </div>
                         </div>
                     ) : <></>
-            }
+                }
+                <button className="create-account" onClick={createAccount}>Create New Account</button>
             </section>
             </>
         )
