@@ -31,7 +31,7 @@ header {
   margin-top: 20px;
   display: flex;
   flex-wrap: wrap;
-  font-size: 15px;
+  font-size: 1rem;
   text-align: left;
   min-height: 150px;
 }
@@ -58,8 +58,15 @@ h1 {
   display: none;
 }
 
-@media (max-width: 800px) {
-  .flex-item {
-    flex: 100%;
+#public-key {
+  font-size: 1rem;
+}
+
+@media (max-width: 650px) {
+  .flex-container {
+    font-size: 0.5rem;
+  }
+  #public-key {
+    font-size: 0.6rem;
   }
 }
