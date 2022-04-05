@@ -7,17 +7,18 @@ export default class extends Component {
   }
 
     render() {
-        let query = this.props.query
+        const query = this.props.query
         const {contract_address, method, args, callbackUrl} = query;
+        const url = callbackUrl + '/'; 
         const newArgs = JSON.parse(args);
         //console.log(typeof(newArgs))
 
         if (typeof(window) === 'object'){
             document.getElementById("confirm").onclick = function () {
-                invoke(0, contract_address, method, newArgs, callbackUrl)
+                invoke(0, contract_address, method, newArgs, url)
             }
             document.getElementById("cancel").onclick = function () {
-                location.href = callbackUrl;
+                location.href = url;
             }
         }
 
