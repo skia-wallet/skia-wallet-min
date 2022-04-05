@@ -7,21 +7,17 @@ export default class extends Component {
   }
 
     render() {
-        //console.log(this.props.query);
         let query = this.props.query
-            // query = {
-            //     contract_address: CONTRACT_ADDRESS,
-            //     method: "init_pool",
-            //     args: ["1000000", "1000000"],
-            //     callbackUrl: "http://skia-wallet-min.vercel.app/"
-            // } 
         const {contract_address, method, args, callbackUrl} = query;
         const newArgs = JSON.parse(args);
-        console.log(typeof(newArgs))
+        //console.log(typeof(newArgs))
 
         if (typeof(window) === 'object'){
             document.getElementById("confirm").onclick = function () {
                 invoke(0, contract_address, method, newArgs, callbackUrl)
+            }
+            document.getElementById("cancel").onclick = function () {
+                location.href = callbackUrl;
             }
         }
 
